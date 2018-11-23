@@ -81,6 +81,8 @@ public abstract class Enemy extends Character {
 		// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
 		// TODO: sử dụng move() để di chuyển
 		// TODO: nhớ cập nhật lại giá trị c�? _moving khi thay đổi trạng thái di chuyển
+		
+		// code by Carlos Florencio
 		int xa = 0, ya = 0;
 		if(_steps <= 0){
 			_direction = _ai.calculateDirection();
@@ -112,7 +114,8 @@ public abstract class Enemy extends Character {
 	@Override
 	public boolean canMove(double x, double y) {
             // TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-			// code by Carlos Florencio
+		
+		// code by Carlos Florencio
             double xr = _x, yr = _y - 16; //subtract y to get more accurate results
 		
             //the thing is, subract 15 to 16 (sprite size), so if we add 1 tile we get the next pixel tile with this
@@ -128,7 +131,6 @@ public abstract class Enemy extends Character {
             Entity a = _board.getEntity(xx, yy, this); //entity of the position we want to go
 
             return a.collide(this);
-            // return false; // code mac dinh
 	}
 
 	@Override
@@ -145,11 +147,10 @@ public abstract class Enemy extends Character {
 			return false;
 		}
 		
-		// if (e instanceof Wall) return false;
+		if (e instanceof Wall) return false;
 		
 		if (e instanceof LayeredEntity) return e.collide(this);
-		// thieu va cham bomb va brick
-		return true; // code mac dinh
+		return true;
 		// return e.collide(this); --> xay ra StackOverFlow???
 	}
 	
