@@ -17,6 +17,8 @@ public class SpeedItem extends Item {
         if (e instanceof Bomber) {
             Game.addBomberSpeed(0.2); // + 0.2 toc do
             remove(); // an xong Item thi xoa khoi ban do man choi
+//            File item = new File("item.WAV");
+//            Sound.playSound(item);
             return true;
         }
         return false;

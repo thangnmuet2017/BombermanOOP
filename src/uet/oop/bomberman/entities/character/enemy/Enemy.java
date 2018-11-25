@@ -164,6 +164,8 @@ public abstract class Enemy extends Character {
     public void kill() {
         if(!_alive) return;
         _alive = false;
+//        File enemy_die = new File("enemy_die.WAV");
+//        Sound.playSound(enemy_die);
 
         _board.addPoints(_points);
 

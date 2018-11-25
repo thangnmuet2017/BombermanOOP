@@ -17,6 +17,8 @@ public class BombItem extends Item {
         if (e instanceof Bomber) {
             Game.addBombRate(1); // + 1 Bomb
             remove(); // an xong Item thi xoa khoi ban do man choi
+//            File item = new File("item.WAV");
+//            Sound.playSound(item);
             return true;
         }
         return false;

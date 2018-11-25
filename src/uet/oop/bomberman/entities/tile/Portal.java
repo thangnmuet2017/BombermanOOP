@@ -24,6 +24,8 @@ public class Portal extends Tile {
             // neu nhu da het enemy, ta xu ly khi Bomber di vao Portal
             if (e.getXTile() == getX() && e.getYTile() == getY()) {
                 _board.nextLevel();
+//                File win = new File("win.WAV");
+//                Sound.playSound(win);
             }
             return true;
         }

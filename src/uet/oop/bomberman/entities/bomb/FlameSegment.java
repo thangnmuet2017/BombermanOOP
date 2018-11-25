@@ -66,9 +66,13 @@ public class FlameSegment extends Entity {
         if(e instanceof Character) {
             ( (Character)e ).kill();
         }
-        else if (e instanceof Bomb) {
+        if (e instanceof Bomb) {
             ((Bomb) e).explode();
         }
+        
+        // neu thay if bang else if, khi co hai hay nhieu enemy cung trong ban kinh bomb
+        // thi chi co 1 enemy bi tieu diet
+        // khi ta dung if thi tat ca enemy trong ban kinh bomb bi tieu diet
         return false;
     }
 	

@@ -17,6 +17,8 @@ public class FlameItem extends Item {
         if (e instanceof Bomber) {
             Game.addBombRadius(1); // + 1 ban kinh sat thuong
             remove(); // an xong Item thi xoa khoi ban do man choi
+//            File item = new File("item.WAV");
+//            Sound.playSound(item);
             return true;
         }
         return false;

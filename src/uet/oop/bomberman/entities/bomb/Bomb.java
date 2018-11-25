@@ -1,7 +1,9 @@
 package uet.oop.bomberman.entities.bomb;
 
+import java.io.File;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.Sound;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
@@ -78,6 +80,9 @@ public class Bomb extends AnimatedEntitiy {
     protected void explode() {
         _exploded = true;
         _allowedToPassThru = true;
+//        File bomb_bang = new File("bomb_bang.WAV");
+//        Sound.playSound(bomb_bang);
+//        am thanh lam giat man hinh choi
         // TODO: xu ly khi character dung tai vi tri bomb
         Character character = _board.getCharacterAt(_x, _y);
         if(character != null)  {

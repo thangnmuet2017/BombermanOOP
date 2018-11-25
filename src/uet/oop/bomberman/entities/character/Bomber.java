@@ -123,6 +123,8 @@ public class Bomber extends Character {
     public void kill() {
         if (!_alive) return;
         _alive = false;
+//        File bomber_die = new File("bomber_die.WAV");
+//        Sound.playSound(bomber_die);
     }
 
     @Override
