@@ -83,9 +83,9 @@ public class Bomber extends Character {
         if(_input.space && Game.getBombRate() > 0 && _timeBetweenPutBombs < 0) {
 			
         // tinh tam vi tri hien tai theo toa do tile va dat bomb tai vi tri do
-            int xt = Coordinates.pixelToTile(_x + _sprite.getSize()/2); 
-            int yt = Coordinates.pixelToTile(_y - _sprite.getSize()/2); 
-            placeBomb(xt, yt);
+            int xCur = Coordinates.pixelToTile(_x + _sprite.getSize()/2); 
+            int yCur = Coordinates.pixelToTile(_y - _sprite.getSize()/2); 
+            placeBomb(xCur, yCur);
             // Trong Sprite, tat ca cac doi tuong deu co SIZE = 16, getSize() tra ve SIZE nen _sprite.getSize() = 16
             Game.addBombRate(-1);
             _timeBetweenPutBombs = 30;
@@ -137,11 +137,13 @@ public class Bomber extends Character {
     protected void calculateMove() {
         // TODO: xu ly nhan tin hieu dieu khien huong di tu _input va goi move() de thuc hien di chuyen
         // TODO: nho cap nhat lai gia tri co _moving khi thay doi trang thai di chuyen
+        
+        // code dua theo calculateMove() cua Enemy
         int xa = 0, ya = 0;
-        if(_input.up)   ya--;
-        if(_input.down) ya++;
-        if(_input.left) xa--;
-        if(_input.right) xa++;
+        if(_input.up) ya--;
+        else if(_input.down) ya++;
+        else if(_input.left) xa--;
+        else if(_input.right) xa++;
 
         if(xa != 0 || ya != 0){
             move(xa*Game.getBomberSpeed(), ya*Game.getBomberSpeed());
@@ -153,10 +155,11 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) {
         // TODO: kiem tra co doi tuong tai vi tri dinh di chuyen den hay khong va co the den do khong
+        
         int tileX = Coordinates.pixelToTile(x);
         int tileY = Coordinates.pixelToTile(y);
-        Entity nextEntity = _board.getEntity(tileX, tileY, this);
-        return collide(nextEntity);
+        Entity checkedEntity = _board.getEntity(tileX, tileY, this);
+        return collide(checkedEntity);
     }
 
     public void moveCenterX() {
@@ -192,7 +195,7 @@ public class Bomber extends Character {
     }
 	
     @Override
-    public void move(double xa, double ya) {
+    public void move(double x, double y) {
         // TODO: su dung canMove() de kiem tra xem co the di chuyen toi diem da tinh toan hay khong va thay doi _x, _y
         // TODO: nho cap nhat lai _direction sau kh di chuyen: up, right, down, left -> 0, 1, 2, 3
         // TODO: Di chuyen nhan vat ra giua
@@ -201,15 +204,15 @@ public class Bomber extends Character {
         double centerX = _x + _sprite.getRealWidth() / 2;
         double centerY = _y - _sprite.getRealHeight() / 2;
         // cap nhat gia tri _direction khi di chuyen
-        if (xa > 0) _direction = 1;
-        if (xa < 0) _direction = 3;
-        if (ya > 0) _direction = 2;
-        if (ya < 0) _direction = 0;
+        if (x > 0) _direction = 1;
+        if (x < 0) _direction = 3;
+        if (y > 0) _direction = 2;
+        if (y < 0) _direction = 0;
         // kiem tra xem co the di chuyen den vi tri da tinh toan hay khong
         // va thuc hien thay doi toa do _x, _y
-        if (canMove(centerX + xa, centerY + ya)) {
-            _x += xa;
-            _y += ya;
+        if (canMove(centerX + x, centerY + y)) {
+            _x += x;
+            _y += y;
         }
         // di chuyen nhan vat ra giua
         autoMoveCenter();
